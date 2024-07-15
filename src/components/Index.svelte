@@ -85,14 +85,6 @@
 		background: var(--color-mark);
 		padding: 0 8px;
 	}
-	h2 {
-		position: sticky;
-		top: 4em;
-	}
-
-	.spacer {
-		height: 36rem;
-	}
 
 	.step {
 		height: 16rem;
