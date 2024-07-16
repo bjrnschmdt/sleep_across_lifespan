@@ -21,14 +21,15 @@
 </script>
 
 <WIP />
-	<section id="background">
+<section id="scroll">
+	<div class="scroll__graphic">
 		<Figure --aspect-ratio="1.5">
 			<!-- svelte-ignore a11y-structure -->
 			<svg style="background: {backgroundColor};" />
 			<figcaption slot="figcaption">Step {value}</figcaption>
 		</Figure>
-	</section>
-	<section  id="foreground">		
+	</div>
+	<div  class="scroll__text">		
 		<Scrolly bind:value>
 			{#each [0, 1, 2, 3, 4] as text, i}
 				{@const active = value === i}
@@ -52,38 +53,32 @@
 				
 			{/each}
 		</Scrolly>
-	</section>
+	</div>
+</section>
+	
 
 
 <!-- <Footer /> -->
 
 <style>
-	#background {
-		position: sticky;
-		/* 		top: 0em; */
-		z-index: -1; /* behind the foreground content */
-		max-width: 54rem;
-		padding: 16px;
+	#scroll {
+		position: relative;
+		width: 54rem;
 		margin: 0 auto;	
-  		top: 50%;
-  		left: 50%;
-  		transform: translate(-50%, -50%);
 	}
 
-	#foreground {
+	.scroll__graphic {
+		position: sticky;
+		z-index: -1; /* behind the foreground content */
+		padding: 16px;
+  		top: 50%;
+  		transform: translate(0, -50%);
+	}
+
+	.scroll__text {
 		max-width: 40rem;
 		padding: 16px;
 		margin: 0 auto;
-	}
-
-	:global(#foreground section) {
-		margin: 32px auto;
-		padding-top: 32px;
-	}
-
-	:global(#foreground h2 span) {
-		background: var(--color-mark);
-		padding: 0 8px;
 	}
 
 	.step {
