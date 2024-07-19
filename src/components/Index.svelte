@@ -3,6 +3,19 @@
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 	import Figure from "$components/figure/Figure.svelte";
 	import { scaleLinear } from 'd3-scale';
+	import LikertScale from '$components/helpers/LikertScale.svelte';
+	import Range from "$components/helpers/Range.svelte";
+
+// Define the options for the Likert scale
+const options = [
+	{ id: 1, label: "Strongly Disagree", value: 1 },
+	{ id: 2, label: "Disagree", value: 2 },
+	{ id: 3, label: "Neutral", value: 3 },
+	{ id: 4, label: "Agree", value: 4 },
+	{ id: 5, label: "Strongly Agree", value: 5 }
+];
+
+const question="How do you feel about this statement?";
 
 	let value;
 	let age = '24';
@@ -17,6 +30,7 @@
 
 	// Update the background color reactively
 	$: backgroundColor = colorScale(value);
+	$: console.log('Component re-rendered due to props:', { question, options });
 
 </script>
 
@@ -31,9 +45,9 @@
 	</div>
 	<div  class="scroll__text">		
 		<Scrolly bind:value>
-			{#each [0, 1, 2, 3, 4] as text, i}
+			{#each [0, 1, 2, 3, 4] as text, i (i)}
 				{@const active = value === i}
-				<div class="step" class:active>
+				<div class="step" class:active={value === i} key={i}>
 					<p>Textbox {text}</p>
 					{#if value === 1}
 					<form class="form-container">
@@ -49,6 +63,9 @@
 					</form>
 					<p>Your age: {age}. Your sleep duration: {sleepDuration} hours</p>
 					{/if}
+					{#if value === 2}
+					<LikertScale question={question} options={options} />
+					{/if}
 				</div>
 				
 			{/each}
@@ -60,7 +77,7 @@
 
 <!-- <Footer /> -->
 
-<style>
+<style lang="postcss">
 	#scroll {
 		position: relative;
 		width: 54rem;

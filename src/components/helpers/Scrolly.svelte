@@ -33,18 +33,20 @@
 	};
 
 	const mostInView = () => {
-		let maxRatio = 0;
-		let maxIndex = 0;
-		for (let i = 0; i < steps.length; i++) {
-			if (steps[i] > maxRatio) {
-				maxRatio = steps[i];
-				maxIndex = i;
-			}
-		}
+    let maxRatio = 0;
+    let maxIndex = 0;
+    for (let i = 0; i < steps.length; i++) {
+        if (steps[i] > maxRatio) {
+            maxRatio = steps[i];
+            maxIndex = i;
+        }
+    }
 
-		if (maxRatio > 0) value = maxIndex;
-		else value = undefined;
-	};
+    if (maxRatio > 0 && value !== maxIndex) {
+        console.log("Updating value from", value, "to", maxIndex);
+        value = maxIndex;
+    }
+};
 
 	const createObserver = (node, index) => {
 		const handleIntersect = (e) => {
